@@ -22,6 +22,9 @@
 </div>
 <div class="row container">
         @foreach(var book in @Model.Products){
+            @if (!book.IsActive)
+        {
+
             <div class="col-md-3 mb-2" style="width: 18rem;">
                 <div class="card">
                     <img src="~/img/@book.Image" alt="" class="card-img-top img-fluid mt-1" style="height: 200px; object-fit: contain;">
@@ -33,6 +36,8 @@
                 </div>
             </div>
         }
+
+    }
 </div>
 
     @*

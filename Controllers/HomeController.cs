@@ -160,4 +160,35 @@ public class HomeController : Controller
         return View(model);
 
     }
+    [HttpGet]
+    public IActionResult Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var entity = Repository.Products.FirstOrDefault(x => x.ProductId == id);
+
+        if (entity == null)
+        {
+            return NotFound();
+        }
+        return View("DeleteBooks", entity);
+    }
+    [HttpPost]
+    public IActionResult Delete(int? id, int ProductId)
+    {
+        if (id != ProductId)
+        {
+            return NotFound();
+        }
+        var entity = Repository.Products.FirstOrDefault(x => x.ProductId == ProductId);
+        if (entity == null)
+        {
+            return NotFound();
+        }
+        Repository.DeleteProduct(entity);
+        return RedirectToAction("Admin");
+    }
 }
